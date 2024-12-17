@@ -33,10 +33,10 @@ pipeline {
             }
 		
         }
-		
+
 		stage ('Démarrer projet'){
 			steps {
-				bat 'mvn mvn spring-boot:run'
+				bat 'mvn spring-boot:run'
 			}
 		}
     }
