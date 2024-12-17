@@ -36,7 +36,7 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-				bat 'start mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"'
+                    bat 'start "" mvn spring-boot:run'
 			}
 		}
     }
