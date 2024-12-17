@@ -27,7 +27,7 @@ pipeline {
 		
         }
 		
-		stage('Consruire package') {
+		stage('Construire package') {
             steps {
                 bat 'mvn clean package'
             }
@@ -36,7 +36,11 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-				bat 'nohup mvn spring-boot:run > output.log 2>&1 &'
+				script {
+                    bat '''
+                    nohup mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081" > spring_boot_output.log 2>&1 &
+                    '''
+                }
 			}
 		}
     }
