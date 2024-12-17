@@ -36,7 +36,7 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-				bat 'mvn spring-boot:run'
+				bat 'nohup mvn spring-boot:run > output.log 2>&1 &'
 			}
 		}
     }
