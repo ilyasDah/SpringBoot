@@ -7,51 +7,46 @@ pipeline {
     }
 
     environment {
-            TARGET_DIR = 'D:\\SupMTI\\TP\\Jenkins\\deploy'   // Le répertoire de destination pour le JAR
+        TARGET_DIR = 'D:\\SupMTI\\TP\\Jenkins\\deploy'   // Le répertoire de destination pour le JAR
     }
 
     stages {
-		stage('Checkout from git') {
+        stage('Checkout from git') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/ilyasDah/SpringBoot.git'
             }
-
         }
-        stage('Compile code') {
+
+        stage('Compile Code') {
             steps {
                 bat 'mvn compile'
             }
-
         }
 
-		stage('Construire package') {
+        stage('Build Package') {
             steps {
                 bat 'mvn clean install package'
             }
-
         }
 
-		stage ('Déployer projet'){
-			steps {
-			        bat 'copy target\\Springboot-0.0.1-SNAPSHOT.jar D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar'
-			}
-		}
-		stage ('Démarrer projet'){
+        stage('Deploy Project') {
             steps {
-                 script {
-                    // PowerShell command to run the .jar file in the background without opening a new window
-                    powershell '''
-                    Start-Process -FilePath "java" -ArgumentList "-jar D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar --server.port=8081" -NoNewWindow
-                    '''
-                }
+                bat 'copy target\\Springboot-0.0.1-SNAPSHOT.jar D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar'
+            }
+        }
+
+        stage('Start Project') {
+            steps {
+                // Utilisation de la commande 'start /b' pour lancer le fichier .bat en arrière-plan sans fenêtre
+                bat 'start /b D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat'
             }
         }
     }
-	post {
-		failure {
-			echo "le build n'a pas bien passé :( "
-		}
-	}
 
+    post {
+        failure {
+            echo "Le build n'a pas bien passé :("
+        }
+    }
 }
