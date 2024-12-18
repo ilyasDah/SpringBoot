@@ -6,6 +6,10 @@ pipeline {
         maven "M3"
     }
 
+    environment {
+            TARGET_DIR = 'D:\\SupMTI\\TP\\Jenkins\\deploy'   // Le répertoire de destination pour le JAR
+    }
+
     stages {
 		stage('Checkout from git') {
             steps {
@@ -36,8 +40,8 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-			        bat 'copy target/Springboot-0.0.1-SNAPSHOT.jar D:/SupMTI/TP/Jenkins/deploy'
-                    bat 'start java -jar D:/SupMTI/TP/Jenkins/deploy/Springboot-0.0.1-SNAPSHOT.jar'
+			        bat 'copy target\\Springboot-0.0.1-SNAPSHOT.jar "${TARGET_DIR}\\Springboot-0.0.1-SNAPSHOT.jar"'
+                    bat 'start java -jar "${TARGET_DIR}\\Springboot-0.0.1-SNAPSHOT.jar"'
 			}
 		}
     }
