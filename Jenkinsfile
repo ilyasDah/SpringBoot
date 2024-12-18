@@ -39,7 +39,9 @@ pipeline {
 		}
 		stage ('Démarrer projet'){
             steps {
-			    bat '''runas /user:Administrator "D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat"'''
+                def jarPath = 'D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar'
+                // Run the jar in the background
+                bat """start java -jar "${jarPath}" --server.port=8081"""
             }
         }
     }
