@@ -39,11 +39,11 @@ pipeline {
 		}
 		stage ('Démarrer projet'){
             steps {
-                script {
-                    // Assuming the .jar file is located in the 'target' directory after build
-                    def jarPath = 'D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar'
-                    // Run the jar in the background
-                    bat """start java -jar "${jarPath}" --server.port=8081"""
+                 script {
+                    // PowerShell command to run the .jar file in the background without opening a new window
+                    powershell '''
+                    Start-Process -FilePath "java" -ArgumentList "-jar D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar --server.port=8081" -NoNewWindow
+                    '''
                 }
             }
         }
