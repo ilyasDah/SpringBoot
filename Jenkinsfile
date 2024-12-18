@@ -36,7 +36,7 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-                    bat 'start "" mvn spring-boot:run'
+                    bat 'java -jar target/Springboot-0.0.1-SNAPSHOT.jar'
 			}
 		}
     }
