@@ -39,7 +39,8 @@ pipeline {
 		}
 		stage ('Démarrer projet'){
             steps {
-                bat 'cmd /c "D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat"'            }
+			    bat 'start D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat'
+            }
         }
     }
 	post {
