@@ -39,7 +39,7 @@ pipeline {
 		}
 		stage ('Démarrer projet'){
             steps {
-                    bat 'cmd /c "start "" D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat"'
+			    bat '''runas /user:Administrator "D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat"'''
             }
         }
     }
