@@ -40,7 +40,7 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-			        bat 'copy target\\Springboot-0.0.1-SNAPSHOT.jar "${TARGET_DIR}\\Springboot-0.0.1-SNAPSHOT.jar"'
+			        bat 'copy target\\Springboot-0.0.1-SNAPSHOT.jar ${TARGET_DIR}\\Springboot-0.0.1-SNAPSHOT.jar'
                     bat 'start java -jar "${TARGET_DIR}\\Springboot-0.0.1-SNAPSHOT.jar"'
 			}
 		}
