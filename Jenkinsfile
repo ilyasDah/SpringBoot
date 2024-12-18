@@ -22,33 +22,31 @@ pipeline {
             steps {
                 bat 'mvn compile'
             }
-		
-        }
-		stage('build code') {
-            steps {
-                bat 'mvn clean install'
-            }
-		
-        }
-		
-		stage('Construire package') {
-            steps {
-                bat 'mvn clean package'
-            }
-		
+
         }
 
-		stage ('Démarrer projet'){
+		stage('Construire package') {
+            steps {
+                bat 'mvn clean install package'
+            }
+
+        }
+
+		stage ('Déployer projet'){
 			steps {
 			        bat 'copy target\\Springboot-0.0.1-SNAPSHOT.jar D:\\SupMTI\\TP\\Jenkins\\deploy\\Springboot-0.0.1-SNAPSHOT.jar'
-			        bat 'start D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat'
 			}
 		}
+		stage ('Démarrer projet'){
+            steps {
+                    bat '"D:\\SupMTI\\TP\\Jenkins\\deploy\\run-springboot.bat"'
+            }
+        }
     }
 	post {
 		failure {
 			echo "le build n'a pas bien passé :( "
 		}
 	}
-	
+
 }
