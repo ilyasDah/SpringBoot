@@ -36,7 +36,7 @@ pipeline {
 
 		stage ('Démarrer projet'){
 			steps {
-			        bat 'cp target/Springboot-0.0.1-SNAPSHOT.jar D:/SupMTI/TP/Jenkins/deploy'
+			        bat 'copy target/Springboot-0.0.1-SNAPSHOT.jar D:/SupMTI/TP/Jenkins/deploy'
                     bat 'start java -jar D:/SupMTI/TP/Jenkins/deploy/Springboot-0.0.1-SNAPSHOT.jar'
 			}
 		}
